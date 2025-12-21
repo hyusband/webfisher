@@ -212,7 +212,7 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <Button asChild className="w-full bg-white text-blue-700 hover:bg-blue-50 h-12 font-black text-lg rounded-xl shadow-lg">
-                      <a href="/download/INSTRUCCIONES_EXCEL_AQUI.txt" download>
+                      <a href="/download/WebFisher_x86 2.1.1.msi" download>
                         <Download className="mr-2 h-5 w-5" />
                         {t.dashboard.downloadBtn}
                       </a>
