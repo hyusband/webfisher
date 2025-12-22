@@ -201,7 +201,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 py-6 shadow-2xl h-auto"
               >
-                <Link href="/download/WebFisher_x86 2.1.1.msi" download>
+                <Link href="https://download1339.mediafire.com/bfi3bimlqtbgrp3RJIM0jnQjA6zDcDCbTuEWC6T1hGcTWJYZjvmclm5ynP9i6bXOsgSbqwlWPhzQTNg86Ck990nLCh6hdvcLK8IGq5j46EkyUw5uQWXgcD4ENrxYHh_DrrXdsNQ3mFAz-yQBmAxXmkwaC25-JRdBNQWUnVnwz5vC9A/vvfxq0wrm5m0bbv/WebFisher_x86+2.1.1.msi" download>
                   <Download className="mr-2 h-5 w-5" />
                   {t.hero.download}
                 </Link>
