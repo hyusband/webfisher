@@ -21,6 +21,8 @@ import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
 import { Fishdex } from "@/components/dashboard/fishdex"
 import { Leaderboards } from "@/components/dashboard/leaderboards"
+import { DOWNLOAD_CONFIG } from "@/lib/constants"
+import { CreatorRedeem } from "@/components/dashboard/creator-redeem"
 
 export default function DashboardPage() {
   const [user, setUser] = useState<any>(null)
@@ -212,7 +214,7 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <Button asChild className="w-full bg-white text-blue-700 hover:bg-blue-50 h-12 font-black text-lg rounded-xl shadow-lg">
-                      <a href="/download/WebFisher_x86 2.1.1.msi" download>
+                      <a href={DOWNLOAD_CONFIG.url} download>
                         <Download className="mr-2 h-5 w-5" />
                         {t.dashboard.downloadBtn}
                       </a>

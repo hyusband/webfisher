@@ -39,6 +39,10 @@ export const translations = {
             desc: "Crea tu cuenta gratis y únete a miles de pescadores en línea. El juego es completamente GRATIS",
             button: "Crear Cuenta Gratis",
         },
+        partners: {
+            title: "Nuestros Partners",
+            description: "Creadores de contenido que forman parte de la comunidad de WEBFISHER",
+        },
         dashboard: {
             welcome: "¡Bienvenido, {name}!",
             subtitle: "Listo para una gran aventura de pesca",
@@ -98,6 +102,15 @@ export const translations = {
                 userTable: "Gestión de Usuarios",
                 ban: "BANEAR",
                 actions: "Acciones"
+            },
+            creatorRedeem: {
+                title: "Código de Creador",
+                description: "¡Redime un código de tu creador favorito para obtener recompensas!",
+                placeholder: "Ingresa el código aquí",
+                button: "CANJEAR CÓDIGO",
+                success: "¡Código canjeado con éxito!",
+                error: "Código inválido o ya canjeado",
+                loading: "Verificando...",
             }
         },
         settings: {
@@ -192,6 +205,10 @@ export const translations = {
             desc: "Create your free account and join thousands of anglers online. The game is completely FREE",
             button: "Create Free Account",
         },
+        partners: {
+            title: "Our Partners",
+            description: "Content creators who are part of the WEBFISHER community",
+        },
         dashboard: {
             welcome: "Welcome, {name}!",
             subtitle: "Ready for a great fishing adventure",
@@ -251,6 +268,15 @@ export const translations = {
                 userTable: "User Management",
                 ban: "BAN",
                 actions: "Actions"
+            },
+            creatorRedeem: {
+                title: "Creator Code",
+                description: "Redeem a code from your favorite creator to get rewards!",
+                placeholder: "Enter code here",
+                button: "REDEEM CODE",
+                success: "Code redeemed successfully!",
+                error: "Invalid code or already redeemed",
+                loading: "Verifying...",
             }
         },
         settings: {

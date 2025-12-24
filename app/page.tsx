@@ -6,6 +6,9 @@ import { Download, Users, Fish, Trophy, Gamepad2 } from "lucide-react"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
+import { DOWNLOAD_CONFIG } from "@/lib/constants"
+import { Partners } from "@/components/home/partners"
+
 
 export default function Home() {
   const { t } = useLanguage()
@@ -52,7 +55,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base px-6 py-5 shadow-2xl h-auto"
               >
-                <Link href="https://download2292.mediafire.com/wdqqi0son5yg9Fm8rTHbWuRvISCBbdbRJ2bNx0BtbjRSMHyhasWZ-1mNg3UKTzJgiLs7p_e-Y9fKQ3fDc8hJi2RHHGi4Xr5ji0AE7H901mWLuSKdLY7GCgpdNhoO5ckpQW4QtgBi0NkbDGz9zyI-zAtqb2xA_Io_-x5W_otPiO_pzQ/vvfxq0wrm5m0bbv/WebFisher_x86+2.1.1.msi" download>
+                <Link href={DOWNLOAD_CONFIG.url} download>
                   <Download className="mr-2 h-5 w-5" />
                   {t.hero.download}
                 </Link>
@@ -201,7 +204,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 py-6 shadow-2xl h-auto"
               >
-                <Link href="https://download2292.mediafire.com/wdqqi0son5yg9Fm8rTHbWuRvISCBbdbRJ2bNx0BtbjRSMHyhasWZ-1mNg3UKTzJgiLs7p_e-Y9fKQ3fDc8hJi2RHHGi4Xr5ji0AE7H901mWLuSKdLY7GCgpdNhoO5ckpQW4QtgBi0NkbDGz9zyI-zAtqb2xA_Io_-x5W_otPiO_pzQ/vvfxq0wrm5m0bbv/WebFisher_x86+2.1.1.msi" download>
+                <Link href={DOWNLOAD_CONFIG.url} download>
                   <Download className="mr-2 h-5 w-5" />
                   {t.hero.download}
                 </Link>
@@ -218,6 +221,8 @@ export default function Home() {
           </div>
         </ScrollReveal>
       </section>
+
+      <Partners />
 
       <footer className="border-t border-border bg-card/50 backdrop-blur-xl mt-12">
         <div className="container mx-auto px-4 py-6 text-center text-muted-foreground">
