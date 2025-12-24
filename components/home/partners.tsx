@@ -11,7 +11,14 @@ export const Partners = () => {
             name: "2ang15",
             platform: "TikTok",
             url: "https://www.tiktok.com/@2ang15",
-            avatar: "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f2c7a7a5a8a1c9a1a8a1c9a1a8a1c9a1~c5_100x100.jpeg?x-expires=1735232400&x-signature=...", // Enlace temporal, mejor que el user lo actualice o se vea el placeholder
+            avatar: "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f2c7a7a5a8a1c9a1a8a1c9a1a8a1c9a1~c5_100x100.jpeg?x-expires=1735232400&x-signature=...",
+            description: "TikToker & Gamer"
+        },
+        {
+            name: "maluko.rs",
+            platform: "TikTok",
+            url: "https://www.tiktok.com/@maluko.rs",
+            avatar: "", // Placeholder
             description: "TikToker & Gamer"
         },
     ]
