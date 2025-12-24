@@ -52,7 +52,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base px-6 py-5 shadow-2xl h-auto"
               >
-                <Link href="/public/download/WebFisher_x86%202.1.1.msi" download>
+                <Link href="/public/download/WebFisher_x86_2.1.1.msi" download>
                   <Download className="mr-2 h-5 w-5" />
                   {t.hero.download}
                 </Link>
@@ -201,7 +201,7 @@ export default function Home() {
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-lg px-8 py-6 shadow-2xl h-auto"
               >
-                <Link href="/public/download/WebFisher_x86%202.1.1.msi" download>
+                <Link href="/public/download/WebFisher_x86_2.1.1.msi" download>
                   <Download className="mr-2 h-5 w-5" />
                   {t.hero.download}
                 </Link>
