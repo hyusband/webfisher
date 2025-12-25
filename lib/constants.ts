@@ -1,4 +1,4 @@
 export const DOWNLOAD_CONFIG = {
-    url: "https://store8.gofile.io/download/web/18d2ed2c-a141-4e19-96c4-daa52ac535df/webfisher-2.1.0.zip",
-    filename: "webfisher-2.1.0.zip"
+    url: "https://cold-na-phx-7.gofile.io/download/web/08599a2b-63ce-4f84-80e6-d6500695267d/WebFisher_x86%202.1.1.zip",
+    filename: "WebFisher_x86 2.1.1.zip"
 };
