@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   title: "WEBFISHER - Únete a la aventura",
   description: "Juego de pesca relajante y social. Crea tu cuenta y empieza a pescar.",
   generator: "v0.app",
-  metadataBase: new URL("https://webfisher.online"), // Replace with actual URL if known
+  metadataBase: new URL("https://webfisher.net"), // Replace with actual URL if known
   openGraph: {
     title: "WEBFISHER - Únete a la aventura",
     description: "Multiplayer chatroom-focused fishing game! Relax and fish.",
-    url: "https://webfisher.online",
+    url: "https://webfisher.net",
     siteName: "WEBFISHER",
     images: [
       {
