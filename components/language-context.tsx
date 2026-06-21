@@ -20,6 +20,15 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         const savedLang = localStorage.getItem("language") as Language
         if (savedLang && (savedLang === "es" || savedLang === "en")) {
             setLanguageState(savedLang)
+        } else {
+            // Auto-detect browser language
+            const browserLang = navigator.language || navigator.languages?.[0] || ""
+            if (browserLang.toLowerCase().startsWith("es")) {
+                setLanguageState("es")
+            } else {
+                // If it's anything else (English, French, etc), default to English
+                setLanguageState("en")
+            }
         }
     }, [])
 
