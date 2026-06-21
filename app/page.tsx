@@ -8,6 +8,7 @@ import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
 import { DOWNLOAD_CONFIG } from "@/lib/constants"
 import { Partners } from "@/components/home/partners"
+import { LiveStats } from "@/components/home/live-stats"
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      <LiveStats />
       <nav className="border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
