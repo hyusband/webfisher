@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -42,8 +42,6 @@ export function SettingsForm({ initialUsername, initialAvatar, initialFavoriteFi
     const [confirmPassword, setConfirmPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [passwordLoading, setPasswordLoading] = useState(false)
-    const supabase = createClient()
-
     const handleUpdateProfile = async (e: React.FormEvent) => {
         e.preventDefault()
         setLoading(true)
@@ -56,31 +54,15 @@ export function SettingsForm({ initialUsername, initialAvatar, initialFavoriteFi
         }
 
         try {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (!user) throw new Error("No user found")
-
-            // Update auth metadata
-            const { error: authError } = await supabase.auth.updateUser({
-                data: {
-                    username: username,
-                    avatar_url: avatar
-                }
+            const res = await fetch("/api/user/update", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, avatar, favoriteFish })
             })
 
-            if (authError) throw authError
-
-            // Update profiles table
-            const { error: profileError } = await supabase
-                .from("profiles")
-                .update({
-                    username: username,
-                    avatar_url: avatar,
-                    favorite_fish: favoriteFish
-                })
-                .eq("id", user.id)
-
-            if (profileError) {
-                console.error("Profile update error:", profileError)
+            if (!res.ok) {
+                const data = await res.json()
+                throw new Error(data.message || "Failed to update profile")
             }
 
             toast.success(language === "es" ? "Perfil actualizado" : "Profile updated successfully")
@@ -101,11 +83,16 @@ export function SettingsForm({ initialUsername, initialAvatar, initialFavoriteFi
 
         setPasswordLoading(true)
         try {
-            const { error } = await supabase.auth.updateUser({
-                password: password
+            const res = await fetch("/api/user/password", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ password })
             })
 
-            if (error) throw error
+            if (!res.ok) {
+                const data = await res.json()
+                throw new Error(data.message || "Failed to update password")
+            }
 
             toast.success(language === "es" ? "Contraseña actualizada" : "Password updated successfully")
             setPassword("")

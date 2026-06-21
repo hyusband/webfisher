@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,8 +13,6 @@ export const CreatorRedeem = () => {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
     const [message, setMessage] = useState("")
     const { t } = useLanguage()
-    const supabase = createClient()
-
     const handleRedeem = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!code || status === "loading") return
@@ -22,30 +20,15 @@ export const CreatorRedeem = () => {
         setStatus("loading")
 
         try {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (!user) throw new Error("No user")
+            const res = await fetch("/api/creator/redeem", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ code })
+            })
 
-            // Llamada a una función de Supabase o lógica directa
-            // Para este ejemplo, simulamos la lógica que el usuario deberá implementar en el backend
-            const { data: creator, error: creatorError } = await supabase
-                .from("creator_partners")
-                .select("*")
-                .eq("code", code.toUpperCase())
-                .single()
-
-            if (creatorError || !creator) {
-                throw new Error(t.dashboard.creatorRedeem.error)
-            }
-
-            const { error: redeemError } = await supabase
-                .from("code_redemptions")
-                .insert({
-                    user_id: user.id,
-                    creator_id: creator.id
-                })
-
-            if (redeemError) {
-                throw new Error(t.dashboard.creatorRedeem.error)
+            if (!res.ok) {
+                const data = await res.json()
+                throw new Error(data.message || t.dashboard.creatorRedeem.error)
             }
 
             setStatus("success")

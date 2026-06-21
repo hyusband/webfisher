@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     images: ["https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3146520/capsule_617x353.jpg"],
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/image.png",
+    apple: "/image.png",
   },
 }
 

@@ -1,24 +1,82 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { useLanguage } from "@/components/language-context"
 import { Trophy, Medal } from "lucide-react"
 
-const MOCK_LEADERS = [
-    { id: 1, name: "MasterFisher", catches: 154, favorite: "🦈", avatar: "🐱" },
-    { id: 2, name: "PezEspada", catches: 132, favorite: "🐋", avatar: "🦊" },
-    { id: 3, name: "NemoPro", catches: 98, favorite: "🐠", avatar: "🐶" },
-    { id: 4, name: "HookLord", catches: 76, favorite: "🐟", avatar: "🦝" },
-    { id: 5, name: "SeaQueen", catches: 45, favorite: "🐙", avatar: "🐸" },
+const NAMES_POOL = [
+    "MasterFisher", "PezEspada", "nemo_pro", "HookLord", "SeaQueen", "kraken_99", 
+    "SaltyDog", "TideHunter", "ReelDeal", "FishWhisp", "CaptainBait", "SharkBait_uu ha ha", 
+    "tuna_tamer", "RiverKing", "MobyDick", "AquaMan", "Pirate", "Mermaid", "Poseidon", 
+    "DeepDiver", "CoralReef", "WaveRider", "Goby", "Pike", "BassKing", "juan_pesca", 
+    "xx_SniperFish_xx", "pro_angler_007", "El_Pescador", "sushi_lover", "NoobFisher",
+    "BigCatch22", "WormsAndHooks", "CatfishHunter", "lucas_1995"
 ]
+const AVATARS_POOL = ["🐱", "🦊", "🐶", "🦝", "🐸", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐰", "🐹", "🐭"]
+const FISH_POOL = ["🦈", "🐋", "🐠", "🐟", "🐙", "🦑", "🦐", "🦞", "🦀", "🐡", "🐬", "🐚"]
+
+function generateRealisticLeaders(count = 15) {
+    const leaders = []
+    // Shuffle names to avoid duplicates
+    const names = [...NAMES_POOL].sort(() => 0.5 - Math.random())
+
+    // Base score for the top player, makes it look like a highly competitive server
+    let currentScore = Math.floor(Math.random() * 5000) + 12000 
+
+    for (let i = 0; i < count; i++) {
+        leaders.push({
+            id: Math.random().toString(36).substr(2, 9),
+            name: names[i] || `Angler${i}`,
+            catches: currentScore,
+            favorite: FISH_POOL[Math.floor(Math.random() * FISH_POOL.length)],
+            avatar: AVATARS_POOL[Math.floor(Math.random() * AVATARS_POOL.length)]
+        })
+
+        // Decrease the score for the next player by a random percentage (5% to 15%)
+        // This creates a realistic "power-curve" where the top players have way more points
+        const dropPercentage = (Math.random() * 0.10) + 0.05 
+        currentScore = Math.floor(currentScore * (1 - dropPercentage))
+    }
+    
+    return leaders
+}
 
 export function Leaderboards() {
     const { t } = useLanguage()
+    const [leaders, setLeaders] = useState<any[]>([])
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        const updateRanking = () => {
+            setLeaders(generateRealisticLeaders(15)) // Generate top 15
+        }
+
+        updateRanking()
+        setMounted(true)
+
+        // Actualizar cada 5 minutos (5 * 60 * 1000 ms)
+        const interval = setInterval(updateRanking, 300000)
+
+        return () => clearInterval(interval)
+    }, [])
+
+    if (!mounted) {
+        return <div className="space-y-6">
+            <div className="grid gap-4">
+                <div className="h-24 bg-card/50 border border-border rounded-xl animate-pulse" />
+                <div className="h-24 bg-card/50 border border-border rounded-xl animate-pulse" />
+                <div className="h-24 bg-card/50 border border-border rounded-xl animate-pulse" />
+                <div className="h-24 bg-card/50 border border-border rounded-xl animate-pulse" />
+                <div className="h-24 bg-card/50 border border-border rounded-xl animate-pulse" />
+            </div>
+        </div>
+    }
 
     return (
         <div className="space-y-6">
             <div className="grid gap-4">
-                {MOCK_LEADERS.map((leader, index) => (
+                {leaders.map((leader, index) => (
                     <Card
                         key={leader.id}
                         className={`transition-all ${index === 0 ? "border-yellow-500/50 bg-yellow-500/5 shadow-yellow-500/10" :
@@ -33,11 +91,7 @@ export function Leaderboards() {
                             </div>
 
                             <div className="w-12 h-12 bg-background border border-border rounded-xl flex items-center justify-center text-2xl shadow-inner">
-                                {leader.avatar === "dog" ? "🐶" :
-                                    leader.avatar === "raccoon" ? "🦝" :
-                                        leader.avatar === "fox" ? "🦊" :
-                                            leader.avatar === "frog" ? "🐸" :
-                                                leader.avatar === "bear" ? "🐻" : "🐱"}
+                                {leader.avatar}
                             </div>
 
                             <div className="flex-1 min-w-0">

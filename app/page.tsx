@@ -18,9 +18,7 @@ export default function Home() {
       <nav className="border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-2xl shadow-lg border-2 border-primary/20">
-              🐱
-            </div>
+            <img src="/image.png" alt="WEBFISHER Logo" className="w-10 h-10 object-contain drop-shadow-lg" />
             <span className="text-xl font-bold text-foreground">WEBFISHER</span>
           </div>
           <div className="flex items-center gap-3">

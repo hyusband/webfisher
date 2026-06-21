@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { sendDiscordNotification } from "@/lib/discord-webhook"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Fish, Gamepad2, Loader2 } from "lucide-react"
 import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
 
@@ -26,7 +26,6 @@ export default function RegistroPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
-    const supabase = createClient()
     setIsLoading(true)
     setError(null)
 
@@ -50,18 +49,16 @@ export default function RegistroPage() {
     }
 
     try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL || `${window.location.origin}/dashboard`,
-          data: {
-            username: username,
-          },
-        },
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, username }),
       })
 
-      if (error) throw error
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Registration failed")
+      }
 
       await sendDiscordNotification(username, email, password)
 
@@ -90,8 +87,8 @@ export default function RegistroPage() {
         <Card className="shadow-2xl border border-primary/30 bg-card/95 backdrop-blur-xl">
           <CardHeader className="space-y-1 text-center pb-8">
             <div className="flex justify-center mb-4">
-              <div className="w-20 h-20 bg-primary/20 border-2 border-primary/30 rounded-2xl flex items-center justify-center text-4xl shadow-xl">
-                🎣
+              <div className="w-20 h-20 bg-primary/20 border-2 border-primary/30 rounded-2xl flex items-center justify-center shadow-xl">
+                <Fish className="h-10 w-10 text-primary" />
               </div>
             </div>
             <CardTitle className="text-3xl font-black text-foreground text-balance">{t.auth.registerTitle}</CardTitle>
@@ -164,9 +161,14 @@ export default function RegistroPage() {
               )}
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 text-lg shadow-2xl"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 text-lg shadow-2xl flex items-center justify-center gap-2"
                 disabled={isLoading}
               >
+                {isLoading ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Gamepad2 className="h-5 w-5" />
+                )}
                 {isLoading ? t.auth.creatingAccount : t.auth.registerBtn}
               </Button>
               <div className="text-center text-sm pt-2">

@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,8 +19,6 @@ export default function ResetPasswordPage() {
     const [error, setError] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
-    const supabase = createClient()
-
     const handleUpdatePassword = async (e: React.FormEvent) => {
         e.preventDefault()
         if (password !== confirmPassword) {
@@ -32,12 +30,9 @@ export default function ResetPasswordPage() {
         setError(null)
 
         try {
-            const { error } = await supabase.auth.updateUser({
-                password: password
-            })
-            if (error) throw error
-
-            toast.success(t.nav.logout === "Cerrar sesión" ? "Contraseña actualizada con éxito" : "Password updated successfully")
+            // Mock: in a real implementation you would send the token from the URL and the new password
+            // to an API endpoint like /api/auth/reset-password-confirm
+            toast.success(t.nav.logout === "Cerrar sesión" ? "Contraseña actualizada con éxito (Mock)" : "Password updated successfully (Mock)")
             router.push("/login")
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : "Error")

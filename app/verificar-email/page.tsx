@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowLeft, Mail } from "lucide-react"
 import { useEffect } from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { sendDiscordNotification } from "@/lib/discord-webhook"
 import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
@@ -15,15 +15,21 @@ export default function VerificarEmailPage() {
 
   useEffect(() => {
     const logVerification = async () => {
-      const supabase = createClient()
-      const { data: { user } } = await supabase.auth.getUser()
-      if (user) {
-        await sendDiscordNotification(
-          user.user_metadata?.username || "Usuario",
-          user.email || "Sin email",
-          undefined,
-          "Verificación"
-        )
+      try {
+        const res = await fetch("/api/user/profile")
+        if (res.ok) {
+          const data = await res.json()
+          if (data.user) {
+            await sendDiscordNotification(
+              data.profile?.username || "Usuario",
+              data.user.email || "Sin email",
+              undefined,
+              "Verificación"
+            )
+          }
+        }
+      } catch (e) {
+        // Ignore error
       }
     }
     logVerification()

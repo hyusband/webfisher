@@ -2,6 +2,7 @@
 
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { useLanguage } from "@/components/language-context"
+import { User } from "lucide-react"
 
 export const Partners = () => {
     const { t } = useLanguage()
@@ -11,14 +12,14 @@ export const Partners = () => {
             name: "2ang15",
             platform: "TikTok",
             url: "https://www.tiktok.com/@2ang15",
-            avatar: "https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/f2c7a7a5a8a1c9a1a8a1c9a1a8a1c9a1~c5_100x100.jpeg?x-expires=1735232400&x-signature=...",
+            avatar: "https://ui-avatars.com/api/?name=2ang15&background=0D9488&color=fff&size=256",
             description: "TikToker & Gamer"
         },
         {
             name: "maluko.rs",
             platform: "TikTok",
             url: "https://www.tiktok.com/@maluko.rs",
-            avatar: "", // Placeholder
+            avatar: "https://ui-avatars.com/api/?name=maluko&background=0D9488&color=fff&size=256",
             description: "TikToker & Gamer"
         },
     ]
@@ -48,7 +49,11 @@ export const Partners = () => {
                             <div className="relative w-24 h-24 mx-auto mb-6">
                                 <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:bg-primary/40 transition-all"></div>
                                 <div className="relative w-24 h-24 rounded-full border-4 border-primary/20 overflow-hidden bg-muted flex items-center justify-center text-4xl group-hover:scale-105 transition-transform">
-                                    👤
+                                    {partner.avatar ? (
+                                        <img src={partner.avatar} alt={partner.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <User className="w-10 h-10 text-primary/50" />
+                                    )}
                                 </div>
                             </div>
                             <h3 className="text-2xl font-black text-foreground mb-1">@{partner.name}</h3>

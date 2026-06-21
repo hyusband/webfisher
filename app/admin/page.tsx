@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { createClient } from "@/lib/supabase/client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useLanguage } from "@/components/language-context"
@@ -12,12 +12,19 @@ export default function AdminDashboard() {
     const { t } = useLanguage()
     const [users, setUsers] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
-    const supabase = createClient()
-
     useEffect(() => {
         const checkAdmin = async () => {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (!user) {
+            try {
+                const res = await fetch("/api/user/profile")
+                if (!res.ok) {
+                    window.location.href = "/login"
+                    return
+                }
+                const data = await res.json()
+                if (!data.profile?.is_admin) {
+                   // Or handle non-admin, e.g., redirect to dashboard
+                }
+            } catch (e) {
                 window.location.href = "/login"
                 return
             }

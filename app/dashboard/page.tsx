@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { createClient } from "@/lib/supabase/client"
+import { signOut } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -29,27 +29,27 @@ export default function DashboardPage() {
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const { t, language } = useLanguage()
-  const supabase = createClient()
-
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      if (!user) {
+      try {
+        const res = await fetch("/api/user/profile")
+        if (!res.ok) {
+          window.location.href = "/login"
+          return
+        }
+        const data = await res.json()
+        setUser(data.user)
+        setProfile(data.profile)
+        setLoading(false)
+      } catch (e) {
         window.location.href = "/login"
-        return
       }
-      setUser(user)
-
-      const { data: profile } = await supabase.from("profiles").select("*").eq("id", user.id).single()
-      setProfile(profile)
-      setLoading(false)
     }
     getUser()
   }, [])
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    window.location.href = "/"
+    await signOut({ callbackUrl: "/" })
   }
 
   if (loading) return (
@@ -73,9 +73,7 @@ export default function DashboardPage() {
       <nav className="border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-2xl shadow-lg border-2 border-primary/20">
-              🐱
-            </div>
+            <img src="/image.png" alt="WEBFISHER Logo" className="w-10 h-10 object-contain drop-shadow-lg" />
             <span className="text-xl font-extrabold text-foreground hidden sm:block tracking-tighter uppercase">Webfisher</span>
           </Link>
           <div className="flex items-center gap-4">

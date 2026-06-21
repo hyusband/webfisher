@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { createClient } from "@/lib/supabase/client"
+import { signIn } from "next-auth/react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Fish, Gamepad2, Loader2 } from "lucide-react"
 import { useLanguage } from "@/components/language-context"
 import { LanguageToggle } from "@/components/language-toggle"
 
@@ -23,17 +23,20 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    const supabase = createClient()
     setIsLoading(true)
     setError(null)
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const res = await signIn("credentials", {
+        redirect: false,
         email,
         password,
       })
-      if (error) throw error
+      
+      if (res?.error) throw new Error(res.error)
+      
       router.push("/dashboard")
+      router.refresh()
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "Error")
     } finally {
@@ -57,9 +60,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         < Card className="shadow-2xl border border-accent/30 bg-card/95 backdrop-blur-xl">
           <CardHeader className="space-y-1 text-center pb-8">
-            <div className="flex justify-center mb-4">
-              <div className="w-20 h-20 bg-accent/20 border-2 border-accent/30 rounded-2xl flex items-center justify-center text-4xl shadow-xl">
-                🎣
+            <div className="flex justify-center">
+              <div className="w-20 h-20 bg-primary/20 border-2 border-primary/30 rounded-2xl flex items-center justify-center shadow-xl">
+                <Fish className="h-10 w-10 text-primary" />
               </div>
             </div>
             <CardTitle className="text-3xl font-black text-foreground text-balance">{t.auth.loginTitle}</CardTitle>
@@ -112,9 +115,14 @@ export default function LoginPage() {
               )}
               <Button
                 type="submit"
-                className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold py-6 text-lg shadow-2xl"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 text-lg shadow-2xl flex items-center justify-center gap-2"
                 disabled={isLoading}
               >
+                {isLoading ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Gamepad2 className="h-5 w-5" />
+                )}
                 {isLoading ? t.auth.loggingIn : t.auth.loginBtn}
               </Button>
               <div className="text-center text-sm pt-2">

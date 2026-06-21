@@ -23,9 +23,7 @@ export default function GalleryPage() {
             <nav className="border-b border-border bg-card/50 backdrop-blur-xl sticky top-0 z-50">
                 <div className="container mx-auto px-4 py-4 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-xl shadow-lg">
-                            🎣
-                        </div>
+                        <img src="/image.png" alt="WEBFISHER Logo" className="w-10 h-10 object-contain drop-shadow-lg" />
                         <span className="text-xl font-extrabold text-foreground hidden sm:block uppercase tracking-tighter">Webfisher Gallery</span>
                     </Link>
                     <div className="flex items-center gap-4">
