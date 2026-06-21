@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "NODE_OPTIONS='--max-old-space-size=768' next build",
+    "build": "prisma generate && NODE_OPTIONS='--max-old-space-size=768' next build",
     "dev": "next dev -p 5731",
     "lint": "eslint .",
     "start": "NODE_OPTIONS='--max-old-space-size=768' next start -p 5731"
