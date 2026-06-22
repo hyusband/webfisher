@@ -22,17 +22,9 @@ export const metadata: Metadata = {
     siteName: "WEBFISHER",
     images: [
       {
-        url: "/image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    videos: [
-      {
-        url: "/Webfisher%20Release%20Trailer.mp4",
+        url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3146520/ss_d1fdc753a7dc005896e239ea5ea055618a744bb6.1920x1080.jpg?t=1728673229",
         width: 1920,
         height: 1080,
-        type: "video/mp4",
       },
     ],
     locale: "es_ES",
@@ -42,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WEBFISHER - Únete a la aventura",
     description: "Relax and fish on the web!",
-    images: ["/image.png"],
+    images: ["https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3146520/ss_d1fdc753a7dc005896e239ea5ea055618a744bb6.1920x1080.jpg?t=1728673229"],
   },
   icons: {
     icon: "/image.png",
