@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "WEBFISHER",
     images: [
       {
-        url: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3146520/capsule_617x353.jpg",
+        url: "/image.png",
         width: 1200,
         height: 630,
       },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "WEBFISHER - Únete a la aventura",
     description: "Relax and fish on the web!",
-    images: ["https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3146520/capsule_617x353.jpg"],
+    images: ["/image.png"],
   },
   icons: {
     icon: "/image.png",
