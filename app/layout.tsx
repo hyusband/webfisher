@@ -27,6 +27,14 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
+    videos: [
+      {
+        url: "/Webfisher%20Release%20Trailer.mp4",
+        width: 1920,
+        height: 1080,
+        type: "video/mp4",
+      },
+    ],
     locale: "es_ES",
     type: "website",
   },
