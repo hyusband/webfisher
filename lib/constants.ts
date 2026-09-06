@@ -1,4 +1,4 @@
 export const DOWNLOAD_CONFIG = {
-    url: "https://www.dropbox.com/scl/fi/8j3zv4umqu8j2a7ucp1ov/WebFisher-Setup-1.2.5.exe?rlkey=aszdqjk5zzaj31svru4na1vw0&st=fgamse7b&dl=1",
+    url: "https://www.dropbox.com/scl/fi/hamx764tbdzb6cizmyjwx/Webfisher-Setup-1.2.5.1.exe?rlkey=t4xy4c45rhr9ole3khcloax11&st=q07vixba&dl=1",
     filename: "Webfisher-Setup-1.2.5.exe"
 };
